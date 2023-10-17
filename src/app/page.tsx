@@ -7,7 +7,7 @@ export default function Home() {
       <p>
         🚧 We're currently fine-tuning our digital airspace! Our website is in
         the workshop, but not for long. Get ready to soar with us as we bring
-        you the latest in drone adventures and expertise. Stay tuned for some
+        you the latest in drone and virtual tour expertise. Stay tuned for some
         thrilling updates! 🌤️✈️
       </p>
     </main>
