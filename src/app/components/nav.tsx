@@ -9,28 +9,31 @@ import {
 
 export default function Navigation() {
   return (
-    <Navbar fluid rounded>
+    <Navbar fluid rounded className="bg-inherit p-6">
       <NavbarBrand as={Link} href="https://flowbite-react.com">
         <img
-          src="/favicon.svg"
+          src="https://cdn.pixabay.com/photo/2021/10/17/13/41/polar-bear-6718362_1280.jpg"
           className="mr-3 h-6 sm:h-9"
-          alt="Flowbite React Logo"
+          alt="PLI"
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Flowbite React
-        </span>
       </NavbarBrand>
       <NavbarToggle />
       <NavbarCollapse>
-        <NavbarLink href="#" active>
+        <NavbarLink href="#" active className="text-xl">
           Home
         </NavbarLink>
-        <NavbarLink as={Link} href="#">
+        <NavbarLink as={Link} href="#" className="text-xl">
           About
         </NavbarLink>
-        <NavbarLink href="#">Services</NavbarLink>
-        <NavbarLink href="#">Pricing</NavbarLink>
-        <NavbarLink href="#">Contact</NavbarLink>
+        <NavbarLink href="#" className="text-xl">
+          Services
+        </NavbarLink>
+        <NavbarLink href="#" className="text-xl">
+          Map
+        </NavbarLink>
+        <NavbarLink href="#" className="text-xl">
+          Contact
+        </NavbarLink>
       </NavbarCollapse>
     </Navbar>
   );
