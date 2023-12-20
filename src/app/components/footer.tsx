@@ -1,14 +1,4 @@
-import {
-  Footer,
-  FooterBrand,
-  FooterCopyright,
-  FooterDivider,
-  FooterIcon,
-  FooterLink,
-  FooterLinkGroup,
-  FooterTitle,
-} from "flowbite-react";
-import { useEffect } from "react";
+import { Footer, FooterCopyright } from "flowbite-react";
 
 export default function Component() {
   return (
