@@ -3,11 +3,13 @@
 import { Suspense } from "react";
 import Mapped from "../components/map";
 import MapSkeleton from "../components/skeleton/map-skeleton";
+import MappedNoPAckage from "../components/mapbox-gl-js";
 
 export default function MapPage() {
   return (
-    //     <Suspense fallback={<MapSkeleton />}>
-    <Mapped />
-    //     </Suspense>
+    <>
+      <Mapped />
+      {/* <MappedNoPAckage /> */}
+    </>
   );
 }
