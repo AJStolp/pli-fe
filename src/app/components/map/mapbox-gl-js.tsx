@@ -2,7 +2,7 @@ import { useState } from "react";
 import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { Suspense } from "react";
-import MapSkeleton from "./skeleton/map-skeleton";
+import MapSkeleton from "../skeleton/map-skeleton";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./pin";
 import * as React from "react";

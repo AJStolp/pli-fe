@@ -12,7 +12,6 @@ const initialViewState = {
 };
 
 export default function MapComponent() {
-  const [showPopup, setShowPopup] = useState<boolean>(false);
   const [zoomLevel, setZoomLevel] = useState(4);
   const [showMessage, setShowMessage] = useState(true);
   const [markers, setMarkers] = useState([
@@ -47,23 +46,35 @@ export default function MapComponent() {
       });
     }
   };
-  const handlePopupOpen = (markerId: number) => {
-    setShowPopup((prevstate) => !prevstate);
-    console.log(showPopup, "show popup");
-    console.log(`Popup opened for marker ID ${markerId}`);
-  };
 
   const togglePopup = (markerId: number) => {
+    console.log(`Popup opened for marker ID ${markerId}`);
     setMarkers((prevMarkers) =>
       prevMarkers.map((marker) =>
         marker.id === markerId
           ? { ...marker, showPopup: !marker.showPopup }
-          : marker
+          : { ...marker, showPopup: false }
       )
     );
   };
 
-  useEffect(() => {}, [markers]);
+  useEffect(() => {
+    mapRef?.current?.on("click", () => {
+      setMarkers((prevMarkers) =>
+        prevMarkers.map((marker) => ({ ...marker, showPopup: true }))
+      );
+    });
+  }, [mapRef]);
+
+  useEffect(() => {
+    // Close all popups when the showPopup state changes for any marker
+    const shouldCloseAllPopups = markers.some((marker) => marker.showPopup);
+    if (shouldCloseAllPopups) {
+      setMarkers((prevMarkers) =>
+        prevMarkers.map((marker) => ({ ...marker, showPopup: false }))
+      );
+    }
+  }, [markers]);
 
   return (
     <>
@@ -93,7 +104,6 @@ export default function MapComponent() {
             latitude={marker.latitude}
             longitude={marker.longitude}
             onClick={() => {
-              console.log("yayaya", marker.id);
               togglePopup(marker.id);
             }}
           >
@@ -104,7 +114,6 @@ export default function MapComponent() {
                 longitude={marker.longitude}
                 anchor="bottom"
                 onClose={() => togglePopup(marker.id)}
-                onOpen={() => handlePopupOpen(marker.id)} // Use the onOpen callback
                 className="text-black"
               >
                 {marker.description}

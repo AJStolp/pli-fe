@@ -1,8 +1,8 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import Navigation from "./components/nav";
-import Footer from "./components/footer";
+import Navigation from "./components/nav/nav";
+import Footer from "./components/footer/footer";
 import Script from "next/script";
 import Link from "next/link";
 

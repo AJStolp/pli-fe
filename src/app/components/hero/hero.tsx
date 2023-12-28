@@ -1,7 +1,7 @@
 import { Suspense } from "react";
-import HeroSkeleton from "./skeleton/hero-skeleton";
-import { HomeData } from "../interfaces/returned-data/home";
-import { getData } from "../api/fetch";
+import HeroSkeleton from "../skeleton/hero-skeleton";
+import { HomeData } from "../../interfaces/returned-data/home";
+import { getData } from "../../api/fetch";
 
 export default async function HeroSection() {
   const endpoint = "/api/home?populate[0]=hero&populate[1]=hero.image";
