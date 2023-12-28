@@ -2,14 +2,9 @@ import HeroSection from "./components/hero/hero";
 
 export default async function Page() {
   try {
-    // Your main JSX code here
-    const jsxContent = (
-      <main>
-        <HeroSection />
-      </main>
-    );
+    const jsxContent = <main>The countdown to takeoff has begun...</main>;
 
-    return jsxContent; // Return the JSX content
+    return jsxContent;
   } catch (error) {
     return <div>Error:</div>;
   }

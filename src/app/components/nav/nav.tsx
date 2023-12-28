@@ -15,10 +15,10 @@ export default async function Navigation() {
 
   try {
     const data: NavData = await getData(endpoint);
-    console.log(data.id, "Dataaa");
+    console.log(data.attributes, "Dataaa");
 
     return (
-      <Suspense fallback={"Loading"}>
+      <Suspense fallback={"...Loading..."}>
         <Navbar fluid rounded className="bg-inherit p-6">
           <NavbarBrand as={Link} href="https://flowbite-react.com">
             <img

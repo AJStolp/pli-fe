@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background text-text">
       <body className={inter.className}>
-        <Navigation />
+        {/* <Navigation /> */}
         {children}
         <Footer />
       </body>

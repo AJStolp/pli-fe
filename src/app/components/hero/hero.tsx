@@ -23,7 +23,7 @@ export default async function HeroSection() {
             <img
               className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
               src={data.attributes.hero.image.data.attributes.url}
-              alt=""
+              alt={data.attributes.hero.image.data.attributes.alternativeText}
             />
           </div>
           <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
