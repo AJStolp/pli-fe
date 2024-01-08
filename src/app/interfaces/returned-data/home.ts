@@ -5,6 +5,7 @@ export interface HomeData {
     hero: {
       id: number;
       heading: string;
+      content: string;
       image: {
         data: {
           id: number;

@@ -1,8 +1,7 @@
-export default function About() {
+export default function Gallery() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>yaya</h1>
-      <p>About Page</p>
+      <h1>Gallery</h1>
     </main>
   );
 }
