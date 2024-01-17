@@ -11,7 +11,8 @@ const config: Config = {
     extend: {
       colors: {
         text: "#ffffff",
-        background: "#121212",
+        // background: "#121212",
+        background: "#181717",
         primary: "#007f80",
         secondary: "#1f1f1f",
         accent: "#3ee0cf",
@@ -20,6 +21,9 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      height: {
+        "35": "35rem",
       },
     },
   },

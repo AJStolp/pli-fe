@@ -5,6 +5,7 @@ import Navigation from "./components/nav/nav";
 import Footer from "./components/footer/footer";
 import Script from "next/script";
 import Link from "next/link";
+import NavigationCentered from "./components/nav/nav-centered";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="bg-background text-text">
       <body className={inter.className}>
-        <Navigation />
+        <NavigationCentered />
         {children}
         <Footer />
       </body>

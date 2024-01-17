@@ -11,7 +11,7 @@ import { NavData } from "../../interfaces/returned-data/navigation";
 import { getData } from "../../api/fetch";
 import { Suspense } from "react";
 
-export default async function Navigation() {
+export default async function NavigationCentered() {
   const endpoint = "/api/navigations?populate=*";
 
   try {
@@ -23,11 +23,14 @@ export default async function Navigation() {
 
     return (
       <Suspense fallback={"...Loading..."}>
-        <Navbar fluid rounded className="bg-inherit p-6 border-b-accent">
+        <Navbar fluid rounded className="bg-inherit">
           <NavbarBrand as={Link} href="/">
             <img src={imageUrl} className="mr-3 h-6 sm:h-9" alt="PLI" />
           </NavbarBrand>
-          <NavbarToggle />
+          <div className="flex md:order-2">
+            <Button className="bg-primary">Get started</Button>
+            <NavbarToggle />
+          </div>
           <NavbarCollapse>
             {data.map((item) =>
               item.attributes.linktext.map((val) => (

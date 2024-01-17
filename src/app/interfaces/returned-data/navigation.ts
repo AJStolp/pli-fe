@@ -8,5 +8,12 @@ export interface NavData {
         linkpath: string;
       }
     ];
+    logo: {
+      data: {
+        attributes: {
+          url: string;
+        };
+      };
+    };
   };
 }
