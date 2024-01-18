@@ -10,13 +10,15 @@ export default async function HeroSection() {
     const data: HomeData = await getData(endpoint);
     return (
       <Suspense fallback={<HeroSkeleton />}>
-        <div className="max-w-screen-lg m-auto p-4">
-          <img
-            className="object-cover w-full h-35 m-5"
-            src={data.attributes.hero.image.data.attributes.url}
-            // src="new-removed.png"
-            alt={data.attributes.hero.image.data.attributes.alternativeText}
-          />
+        <div className="py-10">
+          <section className="h-full py-12">
+            <img
+              className="object-cover w-full h-full"
+              src={data.attributes.hero.image.data.attributes.url}
+              // src="new-removed.png"
+              alt={data.attributes.hero.image.data.attributes.alternativeText}
+            />
+          </section>
           <div className="">
             <div className="">
               <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none">
@@ -35,7 +37,7 @@ export default async function HeroSection() {
                   aria-label=""
                   className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-primary hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none bg-secondary"
                 >
-                  Learn more
+                  Map
                 </a>
               </div>
             </div>
