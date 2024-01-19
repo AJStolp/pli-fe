@@ -1,11 +1,17 @@
 import { Footer, FooterCopyright } from "flowbite-react";
 
 export default function Component() {
+  const currentYear = new Date().getFullYear();
+
   return (
     <Footer container className="bg-inherit fixed bottom-0">
       <div className="w-full">
         <div className="w-full sm:flex sm:items-center sm:justify-between">
-          <FooterCopyright href="#" by="Polar Lights Imaging™" year={2024} />
+          <FooterCopyright
+            href="#"
+            by="Polar Lights Imaging"
+            year={currentYear}
+          />
           <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
             {/* <FooterIcon href="#" icon={BsFacebook} />
             <FooterIcon href="#" icon={BsInstagram} />

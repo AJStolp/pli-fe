@@ -1,9 +1,10 @@
 import CardComponent from "./components/card/card";
 import HeroSection from "./components/hero/hero";
 
-// /api/home?populate[0]=hero&populate[1]=hero.image&populate[2]=threeColumnP
-
 export default async function Page() {
+  const endpoint =
+    "api/home?populate[0]=hero&populate[1]=hero.image&populate[2]=threeColumnP";
+
   try {
     const jsxContent = (
       <main className="max-w-screen-lg m-auto px-4 ">
