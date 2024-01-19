@@ -14,3 +14,7 @@ body {
 svg {
       cursor: pointer;
 }
+
+.text-center {
+      text-align: -webkit-center;
+}
