@@ -24,24 +24,28 @@ export default async function Page() {
           {data.attributes.ServicesOverview}
         </h2>
 
-        <div className="mb-3 text-texx dark:text-gray-400">
+        <p className="mb-3 text-texx dark:text-gray-400">
           {data.attributes.threeColumnP.topP}
-        </div>
+        </p>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          <div className="mb-3 text-text dark:text-gray-400">
-            <div className="text-center">
-              <img src={icon1} alt={""} />
+          <section className="mb-3 text-text dark:text-gray-400">
+            <div className="w-24 sm:w-16 mx-auto my-6">
+              <img src={icon1} alt={""} className="mr-4 w-full rounded-full" />
             </div>
-            {data.attributes.threeColumnP.col1}
-          </div>
-          <div className="mb-3 text-text dark:text-gray-400">
-            <img src={icon2} alt={""} width={25} height={25} />
-            {data.attributes.threeColumnP.col2}
-          </div>
-          <div className="mb-3 text-text dark:text-gray-400">
-            <img src={icon3} alt={""} width={25} height={25} />
-            {data.attributes.threeColumnP.col3}
-          </div>
+            <p>{data.attributes.threeColumnP.col1}</p>
+          </section>
+          <section className="mb-3 text-text dark:text-gray-400">
+            <div className="w-24 sm:w-16 mx-auto my-6">
+              <img src={icon2} alt={""} className="mr-4 w-full rounded-full" />
+            </div>
+            <p>{data.attributes.threeColumnP.col2}</p>
+          </section>
+          <section className="mb-3 text-text dark:text-gray-400">
+            <div className="w-24 sm:w-16 mx-auto my-6">
+              <img src={icon3} alt={""} className="mr-4 w-full rounded-full" />
+            </div>
+            <p>{data.attributes.threeColumnP.col3}</p>
+          </section>
         </div>
         <p className="mb-3 text-text dark:text-gray-400">
           {data.attributes.threeColumnP.bottomP}
