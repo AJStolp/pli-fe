@@ -18,7 +18,6 @@ export default async function HeroSection({ data }: HeroSectionProps) {
             <img
               className="object-cover w-full h-full"
               src={data.attributes.hero.image.data.attributes.url}
-              // src="new-removed.png"
               alt={data.attributes.hero.image.data.attributes.alternativeText}
             />
           </section>
@@ -30,17 +29,17 @@ export default async function HeroSection({ data }: HeroSectionProps) {
               <p>{data.attributes.hero.content}</p>
               <div className="flex items-center pt-6">
                 <a
-                  href="/"
+                  href="/services"
                   className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-primary hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
                 >
-                  Get started
+                  {data.attributes.hero.cta1}
                 </a>
                 <a
-                  href="/"
+                  href="/map"
                   aria-label=""
                   className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide transition duration-200 rounded shadow-md bg-primary hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none bg-secondary"
                 >
-                  Map
+                  {data.attributes.hero.cta2}
                 </a>
               </div>
             </div>

@@ -30,7 +30,7 @@ export default async function NavigationCentered() {
           <div className="flex md:order-2">
             <a
               href="mailto:polarlightsimaging@gmail.com"
-              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 dark:bg-cyan-600 dark:enabled:hover:bg-cyan-700 dark:focus:ring-cyan-800 rounded-lg focus:ring-2 bg-primary"
+              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 dark:bg-cyan-600 rounded-lg focus:ring-2 bg-primary"
             >
               <span className="flex items-center transition-all duration-200 rounded-md text-sm px-4 py-2">
                 Contact Us
@@ -44,7 +44,7 @@ export default async function NavigationCentered() {
                 <NavbarLink
                   key={val.id}
                   href={val.linkpath}
-                  className="text-lg text-text lg:p-6 xl:px-12"
+                  className="text-lg text-text lg:p-6 xl:px-12 dark:md:hover:bg-fuchsia-60 hover:underline"
                 >
                   {val.linktext}
                 </NavbarLink>

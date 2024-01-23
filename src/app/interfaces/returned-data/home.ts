@@ -7,6 +7,8 @@ export interface HomeData {
       id: number;
       heading: string;
       content: string;
+      cta1: string;
+      cta2: string;
       image: {
         data: {
           id: number;
@@ -23,6 +25,22 @@ export interface HomeData {
       col2: string;
       col3: string;
       bottomP: string;
+      bottomCta: string;
+      col1cta: {
+        id: number;
+        linktext: string;
+        linkpath: string;
+      };
+      col2cta: {
+        id: number;
+        linktext: string;
+        linkpath: string;
+      };
+      col3cta: {
+        id: number;
+        linktext: string;
+        linkpath: string;
+      };
       col3icon: {
         data: {
           attributes: {
