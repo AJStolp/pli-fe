@@ -4,7 +4,26 @@ export interface ServicesData {
     intro: string;
     description: string;
     dronecontent: ContentNode[];
+    matterportcontent: ContentNode[];
     heading: string;
+    tab1icon: {
+      data: {
+        id: number;
+        attributes: {
+          alternativeText: string;
+          url: string;
+        };
+      };
+    };
+    tab2icon: {
+      data: {
+        id: number;
+        attributes: {
+          alternativeText: string;
+          url: string;
+        };
+      };
+    };
   };
 }
 
