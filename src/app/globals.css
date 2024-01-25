@@ -18,3 +18,9 @@ svg {
 .text-center {
       text-align: -webkit-center;
 }
+
+.access-ul-li > ul > li > a:hover {
+      color: white !important;
+      background-color: #3ee0cf;
+      border-radius: 8px;
+}

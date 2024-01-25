@@ -15,6 +15,7 @@ export default async function Servicesa() {
         </h1>
         <p>{data.attributes.intro}</p>
         <div className="bg-gradient-to-r from-accent via-primary to-secondary h-2 my-10 rounded"></div>
+        <h2 className="text-lg font-bold text-text mb-2">Services</h2>
         <TabsComponent data={data} />
       </main>
     );

@@ -1,8 +1,15 @@
 "use client";
 
-import { ServicesData } from "../../interfaces/returned-data/services";
+import {
+  ServicesData,
+  ContentNode,
+  RootNode,
+} from "../../interfaces/returned-data/services";
 import { useState } from "react";
-import ReactMarkdown from "react-markdown";
+import {
+  BlocksRenderer,
+  type BlocksContent,
+} from "@strapi/blocks-react-renderer";
 
 interface TabsDataProps<T> {
   data: T;
@@ -15,14 +22,16 @@ export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
     setActiveTab(index);
   };
 
+  // const content: BlocksContent = data.attributes.content;
+  //   const content: RootNode = {
+  //     type: "root",
+  //     children: data.attributes.content,
+  //   };
+  const content: ContentNode[] = data.attributes.dronecontent;
+
   return (
     <div className="md:flex w-10/12 max-w-screen-lg">
       <ul className="flex-column space-y space-y-4 text-sm font-medium text-gray-500 dark:text-gray-400 md:me-4 mb-4 md:mb-0">
-        <ReactMarkdown>
-          {data.attributes.content
-            .map((item) => item.children.map((inn) => inn.type))
-            .join("")}
-        </ReactMarkdown>
         <li className="border-b-accent">
           <button
             className={`inline-flex items-center px-4 py-3 text-white rounded-lg w-full ${
@@ -63,19 +72,20 @@ export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
         </li>
       </ul>
       <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
-        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-2">
-          Services
-        </h3>
         {activeTab === 0 && (
-          <p className="mb-2">This is the content for the Matterport tab.</p>
+          <BlocksRenderer
+            content={content}
+            blocks={{
+              list: ({ children }) => (
+                <ul className="list-disc max-w-prose">{children}</ul>
+              ),
+            }}
+          />
         )}
-        {activeTab === 1 && (
-          <p className="mb-2">This is the content for the Drone tab.</p>
-        )}
-        <p>
-          The tab JavaScript swaps classes to control the content visibility and
-          styling.
-        </p>
+
+        {/* {activeTab === 0 && (extractedText || "") && (
+          <ReactMarkdown>{extractedText}</ReactMarkdown>
+        )} */}
       </div>
     </div>
   );

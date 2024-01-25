@@ -1,39 +1,20 @@
 export interface ServicesData {
   id: number;
   attributes: {
-    heading: string;
     intro: string;
     description: string;
-    content: [
-      {
-        type: string;
-        children: [
-          {
-            text: string;
-            type: string;
-          },
-          {
-            type: string;
-            format: string;
-            children: [
-              {
-                type: string;
-                children: [
-                  {
-                    bold: true;
-                    text: string;
-                    type: string;
-                  },
-                  {
-                    text: string;
-                    type: string;
-                  }
-                ];
-              }
-            ];
-          }
-        ];
-      }
-    ];
+    dronecontent: ContentNode[];
+    heading: string;
   };
+}
+
+export interface ContentNode {
+  type: string;
+  text?: string;
+  children?: ContentNode[] | string;
+}
+
+export interface RootNode {
+  type: "root";
+  children: ContentNode[];
 }
