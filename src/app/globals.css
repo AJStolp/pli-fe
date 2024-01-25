@@ -21,6 +21,6 @@ svg {
 
 .access-ul-li > ul > li > a:hover {
       color: white !important;
-      background-color: #3ee0cf;
+      background-color: #1f1f1f;
       border-radius: 8px;
 }
