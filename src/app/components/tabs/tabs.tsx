@@ -1,42 +1,32 @@
 "use client";
 
-import {
-  ServicesData,
-  ContentNode,
-  RootNode,
-} from "../../interfaces/returned-data/services";
+import { ServicesData } from "../../interfaces/returned-data/services";
 import { useState } from "react";
 import {
   BlocksRenderer,
   type BlocksContent,
 } from "@strapi/blocks-react-renderer";
 
-interface TabsDataProps<T> {
-  data: T;
+interface TabsDataProps {
+  data: any;
 }
 
-export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
+export default function TabsComponent({ data }: TabsDataProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
   };
 
-  // const content: BlocksContent = data.attributes.content;
-  //   const content: RootNode = {
-  //     type: "root",
-  //     children: data.attributes.content,
-  //   };
-
-  const dronecontent: ContentNode[] = data.attributes.dronecontent;
-  const matterportcontent: ContentNode[] = data.attributes.matterportcontent;
+  const dronecontent: BlocksContent = data.attributes.dronecontent;
+  const matterportcontent: BlocksContent = data.attributes.matterportcontent;
 
   return (
-    <div className="md:flex w-10/12 max-w-screen-lg mb-16">
+    <div className="md:flex w-10/12 max-w-screen-lg mb-16 m-auto md:m-0">
       <ul className="flex-column space-y space-y-4 text-sm font-medium md:me-4 mb-4 md:mb-0">
-        <li className="border-b-accent">
+        <li className="border-b-accent w-auto md:w-24">
           <button
-            className={`inline-flex items-center px-4 py-3 text-white rounded-lg w-full hover:underline ${
+            className={`inline-flex items-center px-2 py-3 text-white rounded-lg w-full hover:underline ${
               activeTab === 0 ? "bg-primary border-b-red" : ""
             }`}
             onClick={() => handleTabClick(0)}
@@ -48,10 +38,10 @@ export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
             Tours
           </button>
         </li>
-        <li>
+        <li className="w-auto md:w-24">
           <button
-            className={`inline-flex items-center px-4 py-3 rounded-lg text-text hover:underline w-full  ${
-              activeTab === 1 ? "bg-primary text-secondary" : ""
+            className={`inline-flex items-center px-2 py-3 text-white rounded-lg w-full hover:underline ${
+              activeTab === 1 ? "bg-primary border-b-red" : ""
             }`}
             onClick={() => handleTabClick(1)}
           >
@@ -69,7 +59,10 @@ export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
             content={dronecontent}
             blocks={{
               list: ({ children }) => (
-                <ul className="list-disc max-w-prose">{children}</ul>
+                <ul className="list-disc max-w-prose rich-li">{children}</ul>
+              ),
+              paragraph: ({ children }) => (
+                <p className="max-w-prose py-1 access-anchor">{children}</p>
               ),
             }}
           />
@@ -80,15 +73,14 @@ export default function TabsComponent({ data }: TabsDataProps<ServicesData>) {
             content={matterportcontent}
             blocks={{
               list: ({ children }) => (
-                <ul className="list-disc max-w-prose">{children}</ul>
+                <ul className="list-disc max-w-prose rich-li">{children}</ul>
+              ),
+              paragraph: ({ children }) => (
+                <p className="max-w-prose py-1 access-anchor">{children}</p>
               ),
             }}
           />
         )}
-
-        {/* {activeTab === 0 && (extractedText || "") && (
-          <ReactMarkdown>{extractedText}</ReactMarkdown>
-        )} */}
       </div>
     </div>
   );

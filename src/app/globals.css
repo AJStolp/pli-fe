@@ -24,3 +24,16 @@ svg {
       background-color: #1f1f1f;
       border-radius: 8px;
 }
+
+.rich-li {
+      margin-left: 35px
+}
+
+.access-anchor > a {
+      color: #007f80;
+      cursor: pointer;
+}
+
+.access-anchor > a:hover {
+      text-decoration: underline;
+}

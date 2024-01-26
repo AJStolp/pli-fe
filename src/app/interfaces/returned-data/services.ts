@@ -29,11 +29,12 @@ export interface ServicesData {
 
 export interface ContentNode {
   type: string;
+  image?: string;
   text?: string;
-  children?: ContentNode[] | string;
+  children?: ContentNode[];
 }
 
 export interface RootNode {
   type: "root";
-  children: ContentNode[];
+  children: ContentNode[] | string;
 }
