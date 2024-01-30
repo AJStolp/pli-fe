@@ -45,3 +45,6 @@ svg {
       transform: translate(-50%, -50%);
 }
 
+.mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
+      display: none;
+}

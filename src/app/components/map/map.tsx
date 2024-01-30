@@ -22,9 +22,10 @@ export default function MapComponent() {
   const [showMessage, setShowMessage] = useState<boolean>(true);
   const [markers, setMarkers] = useState<MapContentData[]>([]);
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
+  const [showImage, setShowImage] = useState(false);
 
   const fetchData = async (): Promise<MapContentData[]> => {
-    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/mapcontents?populate=*`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/mapcontents?populate[mapdata][populate]=image`;
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Network response was not ok");
@@ -99,7 +100,7 @@ export default function MapComponent() {
   return (
     <>
       {showMessage && (
-        <div className="message absolute top-2/4 left-2/4 z-10 w-96 h-fit bg-secondary/75 rounded p-8 text-accent">
+        <div className="message absolute top-2/4 left-2/4 z-10 w-96 h-fit bg-background/75 rounded p-8 text-text">
           <h1> Take Flight Over the Midwest!</h1>
           <p>
             Zoom into our interactive map to explore the Upper Peninsula,
@@ -111,7 +112,7 @@ export default function MapComponent() {
             onClick={handleCtaClick}
             className="cta-button pt-8 hover:underline"
           >
-            Zoom In
+            Fly
           </button>
         </div>
       )}
@@ -126,7 +127,41 @@ export default function MapComponent() {
         mapStyle="mapbox://styles/astolp/clqb492vv000h01qhdx103ua6"
         mapboxAccessToken={TOKEN}
       >
-        {markers.map((marker) => (
+        {markers.flatMap((item) =>
+          item.attributes.mapdata.map((data) => {
+            const imageUrl = data.image.data[0].attributes.url;
+            const longitude = Number(data.longitude);
+            const latitude = Number(data.latitude);
+            const description = data.description;
+            const markerId = data.id; // Assuming `data.id` uniquely identifies each marker
+
+            return (
+              <Marker
+                key={markerId}
+                longitude={longitude}
+                latitude={latitude}
+                onClick={() => togglePopup(markerId)}
+              >
+                <Pin />
+                {selectedMarkerId === markerId && (
+                  <Popup
+                    latitude={latitude}
+                    longitude={longitude}
+                    anchor="bottom"
+                    className="text-black"
+                    onClose={() => setSelectedMarkerId(null)}
+                    closeOnClick={false}
+                  >
+                    {description}
+                    <img src={imageUrl} alt="" />
+                  </Popup>
+                )}
+              </Marker>
+            );
+          })
+        )}
+
+        {/* {markers.map((marker) => (
           <Marker
             key={marker.id}
             latitude={marker.attributes.latitude}
@@ -151,7 +186,7 @@ export default function MapComponent() {
               </Popup>
             )}
           </Marker>
-        ))}
+        ))} */}
       </Map>
     </>
   );
