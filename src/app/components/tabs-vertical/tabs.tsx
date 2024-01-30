@@ -53,7 +53,7 @@ export default function TabsComponent({ data }: TabsDataProps) {
           </button>
         </li>
       </ul>
-      <div className="p-6 bg-gray-50 text-medium text-gray-500 dark:text-gray-400 dark:bg-gray-800 rounded-lg w-full">
+      <div className="p-6 bg-secondary text-medium text-text rounded-lg w-full">
         {activeTab === 0 && (
           <BlocksRenderer
             content={dronecontent}

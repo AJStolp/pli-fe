@@ -12,8 +12,8 @@ export default async function HeroSection({ data }: HeroSectionProps) {
 
     return (
       <Suspense fallback={<HeroSkeleton />}>
-        <div className="py-10">
-          <section className="h-full py-12">
+        <div className="py-6">
+          <section className="h-full">
             <img
               className="object-cover w-full h-full"
               src={data.attributes.hero.image.data.attributes.url}

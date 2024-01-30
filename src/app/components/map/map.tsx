@@ -1,8 +1,10 @@
 import Map, { Marker, Popup, MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./pin";
-import { useRef, useState } from "react";
-import pindata from "./pin-data";
+import { useEffect, useRef, useState } from "react";
+import { getData } from "../../api/fetch";
+import { MapContentData } from "../../interfaces/returned-data/map-content";
+import { pinData } from "./pin-data";
 
 const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
@@ -18,7 +20,30 @@ export default function MapComponent() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [zoomLevel, setZoomLevel] = useState<number>(4);
   const [showMessage, setShowMessage] = useState<boolean>(true);
-  const [markers, setMarkers] = useState(pindata);
+  const [markers, setMarkers] = useState<MapContentData[]>([]);
+  const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
+
+  const fetchData = async (): Promise<MapContentData[]> => {
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/mapcontents?populate=*`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const jsonResponse = await response.json();
+    // Assuming the relevant data is nested inside a 'data' property
+    console.log(markers, "markers");
+    return jsonResponse.data;
+  };
+
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        setMarkers(data);
+      })
+      .catch((error) => {
+        return error;
+      });
+  }, []);
 
   const handleCtaClick = () => {
     setZoomLevel(6);
@@ -35,18 +60,24 @@ export default function MapComponent() {
   };
 
   const togglePopup = (markerId: number) => {
-    console.log("Toggling Popup for Marker ID:", markerId);
-    setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) => {
-        const showPopup = marker.id === markerId ? !marker.showPopup : false;
-        console.log(
-          `Marker ${marker.id} - Show Popup: ${showPopup}`,
-          "toggle popup"
-        );
-        return { ...marker, showPopup };
-      })
+    setSelectedMarkerId((prevSelectedMarkerId) =>
+      prevSelectedMarkerId === markerId ? null : markerId
     );
   };
+
+  // const togglePopup = (markerId: number) => {
+  //   console.log("Toggling Popup for Marker ID:", markerId);
+  //   setMarkers((prevMarkers) =>
+  //     prevMarkers.map((marker) => {
+  //       const showPopup = marker.id === markerId ? !marker.showPopup : false;
+  //       console.log(
+  //         `Marker ${marker.id} - Show Popup: ${showPopup}`,
+  //         "toggle popup"
+  //       );
+  //       return { ...marker, showPopup };
+  //     })
+  //   );
+  // };
 
   const closeFullscreen = () => {
     setSelectedImage(null);
@@ -73,7 +104,7 @@ export default function MapComponent() {
           <p>
             Zoom into our interactive map to explore the Upper Peninsula,
             Wisconsin, and beyond through stunning drone photography. Discover
-            hidden gems and breathtaking landscapes with just a click - your
+            hidden gems and breathtaking landscapes with just a click. Your
             aerial adventure starts here!
           </p>
           <button
@@ -98,21 +129,25 @@ export default function MapComponent() {
         {markers.map((marker) => (
           <Marker
             key={marker.id}
-            latitude={marker.latitude}
-            longitude={marker.longitude}
+            latitude={marker.attributes.latitude}
+            longitude={marker.attributes.longitude}
             onClick={() => togglePopup(marker.id)}
           >
             <Pin />
-            {marker.showPopup && (
+            {selectedMarkerId === marker.id && (
               <Popup
-                latitude={marker.latitude}
-                longitude={marker.longitude}
+                latitude={marker.attributes.latitude}
+                longitude={marker.attributes.longitude}
                 anchor="bottom"
                 className="text-black"
+                onClose={() => setSelectedMarkerId(null)}
                 closeOnClick={false}
               >
-                {marker.description}
-                <img src={marker.image} alt="" />
+                {marker.attributes.description}
+                <img
+                  src={marker.attributes.image.data[0].attributes.url}
+                  alt=""
+                />
               </Popup>
             )}
           </Marker>
