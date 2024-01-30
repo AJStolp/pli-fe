@@ -1,8 +1,6 @@
 import { getData } from "./api/fetch";
-import CardComponent from "./components/card/card";
 import HeroSection from "./components/hero/hero";
 import { HomeData } from "./interfaces/returned-data/home";
-import Image from "next/image";
 
 export default async function Page() {
   const endpoint =
@@ -74,10 +72,7 @@ export default async function Page() {
         <p className="mb-3 text-text dark:text-gray-400 pb-12 ">
           {data.attributes.threeColumnP.bottomP}
           <span className="ml-1 underline decoration-accent cursor-pointer">
-            <a
-              // className="cursor-pointer"
-              href="mailto:polarlightsimaging@gmail.com"
-            >
+            <a href="mailto:polarlightsimaging@gmail.com">
               {" "}
               {data.attributes.threeColumnP.bottomCta}
             </a>

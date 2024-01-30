@@ -1,7 +1,8 @@
-import Map, { Marker, Popup, MapboxMap, MapRef } from "react-map-gl";
+import Map, { Marker, Popup, MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./pin";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
+import pindata from "./pin-data";
 
 const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
@@ -12,26 +13,12 @@ const initialViewState = {
 };
 
 export default function MapComponent() {
-  const [zoomLevel, setZoomLevel] = useState(4);
-  const [showMessage, setShowMessage] = useState(true);
-  const [markers, setMarkers] = useState([
-    {
-      latitude: 45.5,
-      longitude: -88.5,
-      id: 1,
-      description: "First Pop Up",
-      showPopup: false,
-    },
-    {
-      latitude: 46.5201,
-      longitude: -88.1946,
-      id: 2,
-      description: "Second Pop Up",
-      showPopup: true,
-    },
-  ]);
-
   const mapRef = useRef<MapRef | null>(null);
+
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [zoomLevel, setZoomLevel] = useState<number>(4);
+  const [showMessage, setShowMessage] = useState<boolean>(true);
+  const [markers, setMarkers] = useState(pindata);
 
   const handleCtaClick = () => {
     setZoomLevel(6);
@@ -48,51 +35,61 @@ export default function MapComponent() {
   };
 
   const togglePopup = (markerId: number) => {
-    console.log(`Popup opened for marker ID ${markerId}`);
+    console.log("Toggling Popup for Marker ID:", markerId);
     setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) =>
-        marker.id === markerId
-          ? { ...marker, showPopup: !marker.showPopup }
-          : { ...marker, showPopup: false }
-      )
+      prevMarkers.map((marker) => {
+        const showPopup = marker.id === markerId ? !marker.showPopup : false;
+        console.log(
+          `Marker ${marker.id} - Show Popup: ${showPopup}`,
+          "toggle popup"
+        );
+        return { ...marker, showPopup };
+      })
     );
   };
 
-  useEffect(() => {
-    mapRef?.current?.on("click", () => {
-      setMarkers((prevMarkers) =>
-        prevMarkers.map((marker) => ({ ...marker, showPopup: true }))
-      );
-    });
-  }, [mapRef]);
+  const closeFullscreen = () => {
+    setSelectedImage(null);
+  };
 
-  useEffect(() => {
-    // Close all popups when the showPopup state changes for any marker
-    const shouldCloseAllPopups = markers.some((marker) => marker.showPopup);
-    if (shouldCloseAllPopups) {
-      setMarkers((prevMarkers) =>
-        prevMarkers.map((marker) => ({ ...marker, showPopup: false }))
-      );
-    }
-  }, [markers]);
+  const fullScreenImageStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: 1050,
+    background: "rgba(0, 0, 0, 0.85)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
 
   return (
     <>
       {showMessage && (
-        <div className="message">
-          <p>Explore cool landmarks on this map!</p>
-          <button onClick={handleCtaClick} className="cta-button">
+        <div className="message absolute top-2/4 left-2/4 z-10 w-96 h-fit bg-secondary/75 rounded p-8 text-accent">
+          <h1> Take Flight Over the Midwest!</h1>
+          <p>
+            Zoom into our interactive map to explore the Upper Peninsula,
+            Wisconsin, and beyond through stunning drone photography. Discover
+            hidden gems and breathtaking landscapes with just a click - your
+            aerial adventure starts here!
+          </p>
+          <button
+            onClick={handleCtaClick}
+            className="cta-button pt-8 hover:underline"
+          >
             Zoom In
           </button>
         </div>
       )}
       <Map
-        mapLib={import("mapbox-gl" as any)}
         ref={mapRef}
         initialViewState={{
-          longitude: -88.5,
+          longitude: -108.5,
           latitude: 45.5,
-          zoom: 4,
+          zoom: 3.5,
         }}
         style={{ width: "100vw", height: "100vh" }}
         mapStyle="mapbox://styles/astolp/clqb492vv000h01qhdx103ua6"
@@ -103,9 +100,7 @@ export default function MapComponent() {
             key={marker.id}
             latitude={marker.latitude}
             longitude={marker.longitude}
-            onClick={() => {
-              togglePopup(marker.id);
-            }}
+            onClick={() => togglePopup(marker.id)}
           >
             <Pin />
             {marker.showPopup && (
@@ -113,10 +108,11 @@ export default function MapComponent() {
                 latitude={marker.latitude}
                 longitude={marker.longitude}
                 anchor="bottom"
-                onClose={() => togglePopup(marker.id)}
                 className="text-black"
+                closeOnClick={false}
               >
                 {marker.description}
+                <img src={marker.image} alt="" />
               </Popup>
             )}
           </Marker>

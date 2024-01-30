@@ -37,3 +37,11 @@ svg {
 .access-anchor > a:hover {
       text-decoration: underline;
 }
+
+.mapboxgl-popup-close-button {
+      display: none;
+}
+.message {
+      transform: translate(-50%, -50%);
+}
+

@@ -1,5 +1,5 @@
 import { getData } from "../api/fetch";
-import TabsComponent from "../components/tabs/tabs";
+import TabsComponent from "../components/tabs-vertical/tabs";
 import { ServicesData } from "../interfaces/returned-data/services";
 
 export default async function Servicesa() {
