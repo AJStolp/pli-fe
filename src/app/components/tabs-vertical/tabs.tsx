@@ -1,6 +1,5 @@
 "use client";
 
-import { ServicesData } from "../../interfaces/returned-data/services";
 import { useState } from "react";
 import {
   BlocksRenderer,

@@ -3,6 +3,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./pin";
 import { useEffect, useRef, useState } from "react";
 import { MapContentData } from "../../interfaces/returned-data/map-content";
+import Link from "next/link";
 
 const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
@@ -98,6 +99,8 @@ export default function MapComponent() {
             const latitude = Number(data.latitude);
             const description = data.description;
             const markerId = data.id; // Assuming `data.id` uniquely identifies each marker
+            const alternativeText =
+              data.image.data[0].attributes.alternativeText;
 
             return (
               <Marker
@@ -116,8 +119,14 @@ export default function MapComponent() {
                     onClose={() => setSelectedMarkerId(null)}
                     closeOnClick={false}
                   >
-                    {description}
-                    <img src={imageUrl} alt="" />
+                    <h2 className="text-base">{description}</h2>
+                    <img src={imageUrl} alt={alternativeText} />
+                    <Link
+                      href={"/gallery"}
+                      className="text-primary text-sm hover:underline cursor-pointer"
+                    >
+                      Explore Our Gallery
+                    </Link>
                   </Popup>
                 )}
               </Marker>
