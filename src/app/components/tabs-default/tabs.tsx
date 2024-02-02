@@ -9,28 +9,25 @@ interface DefaultTabsProps {
   tourdata: TourData[];
 }
 
+interface DisplayedImagesCount {
+  [sectionId: string]: number;
+}
+
 export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const [displayedImagesCount, setDisplayedImagesCount] =
+    useState<DisplayedImagesCount>({});
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
   };
 
-  const urls = dronedata.flatMap((item) =>
-    item.attributes.sections.flatMap((section) =>
-      section.media.flatMap((mediaItem) =>
-        mediaItem.media.data.map((dataItem) =>
-          dataItem.attributes.url.toString()
-        )
-      )
-    )
-  );
-
-  const tourTitle = tourdata.map((text) =>
-    text.attributes.linktext.map((item) => item.linktext)
-  );
-
-  console.log(tourdata, "tourdata");
+  const handleLoadMore = (sectionId: number) => {
+    setDisplayedImagesCount((prevCount) => ({
+      ...prevCount,
+      [sectionId]: (prevCount[sectionId] || 3) + 3, // Start with 4, add 10 more each time
+    }));
+  };
 
   return (
     <div className="text-sm font-medium">
@@ -63,26 +60,40 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
         </li>
       </ul>
       <section className="py-8">
-        {activeTab === 0 && (
-          <div className="text-text">
-            {dronedata.map((droneItem) => (
-              <div key={droneItem.id}>
-                {droneItem.attributes.sections.map((section) => (
-                  <section>
-                    <p key={section.id}>{section.title}</p>
+        {activeTab === 0 &&
+          dronedata.map((droneItem) => (
+            <div key={droneItem.id}>
+              {droneItem.attributes.sections.map((section) => {
+                // Calculate how many images to display for this section
+                const displayCount = displayedImagesCount[section.id] || 3;
+                const imagesToDisplay = section.media
+                  .flatMap((i) => i.media.data)
+                  .slice(0, displayCount);
+
+                return (
+                  <section key={section.id}>
+                    <p>{section.title}</p>
                     <Suspense fallback={"Loading Gallery"}>
                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {urls.map((item) => (
-                          <img src={item} alt="" />
+                        {imagesToDisplay.map((url, index) => (
+                          <img key={index} src={url.attributes.url} alt="" />
                         ))}
                       </div>
+                      {imagesToDisplay.length <
+                        section.media.flatMap((i) => i.media.data).length && (
+                        <button
+                          onClick={() => handleLoadMore(section.id)}
+                          className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
+                        >
+                          Load More
+                        </button>
+                      )}
                     </Suspense>
                   </section>
-                ))}
-              </div>
-            ))}
-          </div>
-        )}
+                );
+              })}
+            </div>
+          ))}
 
         {activeTab === 1 &&
           tourdata.map((item) => (
