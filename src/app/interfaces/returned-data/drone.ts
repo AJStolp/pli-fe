@@ -1,27 +1,27 @@
+interface MediaAttributes {
+  id: number;
+  attributes: {
+    alternativeText: string;
+    url: string;
+  };
+}
+
+interface Media {
+  id: number;
+  media: {
+    data: MediaAttributes[];
+  };
+}
+
+interface Section {
+  id: number;
+  title: string;
+  media: Media[];
+}
+
 export interface DroneData {
   id: number;
   attributes: {
-    sections: [
-      {
-        id: number;
-        title: string;
-        media: [
-          {
-            id: number;
-            media: {
-              data: [
-                {
-                  id: number;
-                  attributes: {
-                    alternativeText: string;
-                    url: string;
-                  };
-                }
-              ];
-            };
-          }
-        ];
-      }
-    ];
+    sections: Section[];
   };
 }
