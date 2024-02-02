@@ -10,13 +10,13 @@ export default async function Gallery() {
   const toursendpoint = "/api/matterports?populate=*";
 
   try {
-    const droneData: DroneData = await getData(droneendpoint);
-    const toursData: TourData = await getData(toursendpoint);
+    const droneData: DroneData[] = await getData(droneendpoint);
+    const toursData: TourData[] = await getData(toursendpoint);
 
     // Assuming data fetching and structure are correct
     return (
       <main className="max-w-screen-lg m-auto px-4">
-        <DefaultTabs dronedata={droneData} matterportdata={toursData} />
+        <DefaultTabs dronedata={droneData} tourdata={toursData} />
       </main>
     );
   } catch (error) {

@@ -2,19 +2,14 @@
 
 import { DroneData } from "../../interfaces/returned-data/drone";
 import { TourData } from "../../interfaces/returned-data/tours";
-
 import { Suspense, useState } from "react";
-import MapSkeleton from "../skeleton/map-skeleton";
 
 interface DefaultTabsProps {
   dronedata: DroneData[];
-  matterportdata: TourData;
+  tourdata: TourData[];
 }
 
-export default function DefaultTabs({
-  dronedata,
-  matterportdata,
-}: DefaultTabsProps) {
+export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index: number) => {
@@ -31,7 +26,11 @@ export default function DefaultTabs({
     )
   );
 
-  console.log(urls, "url");
+  const tourTitle = tourdata.map((text) =>
+    text.attributes.linktext.map((item) => item.linktext)
+  );
+
+  console.log(tourdata, "tourdata");
 
   return (
     <div className="text-sm font-medium">
@@ -85,7 +84,26 @@ export default function DefaultTabs({
           </div>
         )}
 
-        {activeTab === 1 && "yo momma son"}
+        {activeTab === 1 &&
+          tourdata.map((item) => (
+            <section
+              key={item.id}
+              className="grid grid-cols-1 md:grid-cols-2 gap-4"
+            >
+              {item.attributes.linktext.map((text) => (
+                <section key={text.id}>
+                  {/* <h2>{text.linktext}</h2> */}
+                  <iframe
+                    height="500"
+                    width="500"
+                    src={text.linkpath}
+                    allowFullScreen
+                    allow="xr-spatial-tracking"
+                  ></iframe>
+                </section>
+              ))}
+            </section>
+          ))}
       </section>
     </div>
   );

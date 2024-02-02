@@ -48,3 +48,7 @@ svg {
 .mapboxgl-ctrl-bottom-left, .mapboxgl-ctrl-bottom-right {
       display: none;
 }
+
+iframe {
+      width: 100%;
+}
