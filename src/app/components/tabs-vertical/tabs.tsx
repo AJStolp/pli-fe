@@ -34,7 +34,7 @@ export default function TabsComponent({ data }: TabsDataProps) {
               className="w-6 rounded-full mr-0.5"
               src={data.attributes.tab1icon.data.attributes.url}
             />
-            Tours
+            Drone
           </button>
         </li>
         <li className="w-auto md:w-24">
@@ -48,7 +48,7 @@ export default function TabsComponent({ data }: TabsDataProps) {
               className="w-6 rounded-full mr-0.5"
               src={data.attributes.tab2icon.data.attributes.url}
             />
-            Drone
+            Tours
           </button>
         </li>
       </ul>
