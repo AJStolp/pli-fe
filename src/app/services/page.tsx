@@ -3,8 +3,7 @@ import TabsComponent from "../components/tabs-vertical/tabs";
 import { ServicesData } from "../interfaces/returned-data/services";
 
 export default async function Services() {
-  const endpoint =
-    "https://pli-be-production.up.railway.app/api/service?populate=*";
+  const endpoint = `${process.env.NEXT_PUBLIC_STRAPI_BE_UR}/api/service?populate=*`;
 
   try {
     const data: ServicesData = await getData(endpoint);

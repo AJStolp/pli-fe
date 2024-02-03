@@ -5,10 +5,8 @@ import { DroneData } from "../interfaces/returned-data/drone";
 import { TourData } from "../interfaces/returned-data/tours";
 
 export default async function Gallery() {
-  const droneendpoint =
-    "https://pli-be-production.up.railway.app/api/drones?populate[sections][populate][media][populate]=*";
-  const toursendpoint =
-    "https://pli-be-production.up.railway.app/api/matterports?populate=*";
+  const droneendpoint = `${process.env.NEXT_PUBLIC_STRAPI_BE_UR}/api/drones?populate[sections][populate][media][populate]=*`;
+  const toursendpoint = `${process.env.NEXT_PUBLIC_STRAPI_BE_UR}/api/matterports?populate=*`;
 
   try {
     const droneData: DroneData[] = await getData(droneendpoint);

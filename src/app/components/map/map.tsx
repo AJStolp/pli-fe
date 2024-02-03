@@ -5,8 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { MapContentData } from "../../interfaces/returned-data/map-content";
 import Link from "next/link";
 
-const TOKEN =
-  "pk.eyJ1IjoiYXN0b2xwIiwiYSI6ImNscWIwNmpobDB0d2gycWtmamk2aDJqdTYifQ.xeJDAkC5Omjj0NI92stA7A";
+const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
 const initialViewState = {
   latitude: 40,
@@ -23,7 +22,7 @@ export default function MapComponent() {
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
 
   const fetchData = async (): Promise<MapContentData[]> => {
-    const apiUrl = `https://pli-be-production.up.railway.app/api/mapcontents?populate[mapdata][populate]=image`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_UR}/api/mapcontents?populate[mapdata][populate]=image`;
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Network response was not ok");
