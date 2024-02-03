@@ -3,7 +3,8 @@ import { getData } from "../api/fetch";
 import RenderRichText from "./render-rich-text";
 
 export default async function Info() {
-  const endpoint = "/api/about?populate=*";
+  const endpoint =
+    "https://pli-be-production.up.railway.app/api/about?populate=*";
 
   try {
     const data: AboutData = await getData(endpoint);

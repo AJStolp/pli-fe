@@ -4,7 +4,8 @@ import { HomeData } from "../../interfaces/returned-data/home";
 import { getData } from "../../api/fetch";
 
 export default async function HeroSlanted() {
-  const endpoint = "/api/home?populate[0]=hero&populate[1]=hero.image";
+  const endpoint =
+    "https://pli-be-production.up.railway.app/api/home?populate[0]=hero&populate[1]=hero.image";
 
   try {
     const data: HomeData = await getData(endpoint);
