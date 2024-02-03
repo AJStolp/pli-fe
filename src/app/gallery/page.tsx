@@ -6,8 +6,9 @@ import { TourData } from "../interfaces/returned-data/tours";
 
 export default async function Gallery() {
   const droneendpoint =
-    "/api/drones?populate[sections][populate][media][populate]=*";
-  const toursendpoint = "/api/matterports?populate=*";
+    "https://pli-be-production.up.railway.app/api/drones?populate[sections][populate][media][populate]=*";
+  const toursendpoint =
+    "https://pli-be-production.up.railway.app/api/matterports?populate=*";
 
   try {
     const droneData: DroneData[] = await getData(droneendpoint);
