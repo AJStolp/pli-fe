@@ -1,5 +1,5 @@
 export async function getData<T>(endpoint: string): Promise<T> {
-  const url = `${process.env.STRAPI_BE_URL}${endpoint}`;
+  const url = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}${endpoint}`;
   const res = await fetch(url);
 
   if (!res.ok) {

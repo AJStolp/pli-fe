@@ -1,4 +1,4 @@
-export interface NavData {
+export interface TourData {
   id: number;
   attributes: {
     linktext: [
@@ -8,12 +8,5 @@ export interface NavData {
         linkpath: string;
       }
     ];
-    logo: {
-      data: {
-        attributes: {
-          url: string;
-        };
-      };
-    };
   };
 }

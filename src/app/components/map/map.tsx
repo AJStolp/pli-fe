@@ -1,7 +1,9 @@
-import Map, { Marker, Popup, MapboxMap, MapRef } from "react-map-gl";
+import Map, { Marker, Popup, MapRef } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import Pin from "./pin";
 import { useEffect, useRef, useState } from "react";
+import { MapContentData } from "../../interfaces/returned-data/map-content";
+import Link from "next/link";
 
 const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
@@ -12,26 +14,33 @@ const initialViewState = {
 };
 
 export default function MapComponent() {
-  const [zoomLevel, setZoomLevel] = useState(4);
-  const [showMessage, setShowMessage] = useState(true);
-  const [markers, setMarkers] = useState([
-    {
-      latitude: 45.5,
-      longitude: -88.5,
-      id: 1,
-      description: "First Pop Up",
-      showPopup: false,
-    },
-    {
-      latitude: 46.5201,
-      longitude: -88.1946,
-      id: 2,
-      description: "Second Pop Up",
-      showPopup: true,
-    },
-  ]);
-
   const mapRef = useRef<MapRef | null>(null);
+
+  const [zoomLevel, setZoomLevel] = useState<number>(4);
+  const [showMessage, setShowMessage] = useState<boolean>(true);
+  const [markers, setMarkers] = useState<MapContentData[]>([]);
+  const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
+
+  const fetchData = async (): Promise<MapContentData[]> => {
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/mapcontents?populate[mapdata][populate]=image`;
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const jsonResponse = await response.json();
+
+    return jsonResponse.data;
+  };
+
+  useEffect(() => {
+    fetchData()
+      .then((data) => {
+        setMarkers(data);
+      })
+      .catch((error) => {
+        return error;
+      });
+  }, []);
 
   const handleCtaClick = () => {
     setZoomLevel(6);
@@ -48,79 +57,82 @@ export default function MapComponent() {
   };
 
   const togglePopup = (markerId: number) => {
-    console.log(`Popup opened for marker ID ${markerId}`);
-    setMarkers((prevMarkers) =>
-      prevMarkers.map((marker) =>
-        marker.id === markerId
-          ? { ...marker, showPopup: !marker.showPopup }
-          : { ...marker, showPopup: false }
-      )
+    setSelectedMarkerId((prevSelectedMarkerId) =>
+      prevSelectedMarkerId === markerId ? null : markerId
     );
   };
-
-  useEffect(() => {
-    mapRef?.current?.on("click", () => {
-      setMarkers((prevMarkers) =>
-        prevMarkers.map((marker) => ({ ...marker, showPopup: true }))
-      );
-    });
-  }, [mapRef]);
-
-  useEffect(() => {
-    // Close all popups when the showPopup state changes for any marker
-    const shouldCloseAllPopups = markers.some((marker) => marker.showPopup);
-    if (shouldCloseAllPopups) {
-      setMarkers((prevMarkers) =>
-        prevMarkers.map((marker) => ({ ...marker, showPopup: false }))
-      );
-    }
-  }, [markers]);
 
   return (
     <>
       {showMessage && (
-        <div className="message">
-          <p>Explore cool landmarks on this map!</p>
-          <button onClick={handleCtaClick} className="cta-button">
-            Zoom In
+        <div className="message absolute top-2/4 left-2/4 z-10 w-96 h-fit bg-background/75 rounded p-8 text-text">
+          <h1> Take Flight Over the Midwest!</h1>
+          <p>
+            Zoom into our interactive map to explore the Upper Peninsula,
+            Wisconsin, and beyond through stunning drone photography. Discover
+            hidden gems and breathtaking landscapes with just a click. Your
+            aerial adventure starts here!
+          </p>
+          <button
+            onClick={handleCtaClick}
+            className="cta-button pt-8 hover:underline"
+          >
+            Fly
           </button>
         </div>
       )}
       <Map
-        mapLib={import("mapbox-gl" as any)}
         ref={mapRef}
         initialViewState={{
-          longitude: -88.5,
+          longitude: -108.5,
           latitude: 45.5,
-          zoom: 4,
+          zoom: 3.5,
         }}
         style={{ width: "100vw", height: "100vh" }}
         mapStyle="mapbox://styles/astolp/clqb492vv000h01qhdx103ua6"
         mapboxAccessToken={TOKEN}
       >
-        {markers.map((marker) => (
-          <Marker
-            key={marker.id}
-            latitude={marker.latitude}
-            longitude={marker.longitude}
-            onClick={() => {
-              togglePopup(marker.id);
-            }}
-          >
-            <Pin />
-            {marker.showPopup && (
-              <Popup
-                latitude={marker.latitude}
-                longitude={marker.longitude}
-                anchor="bottom"
-                onClose={() => togglePopup(marker.id)}
-                className="text-black"
+        {markers.flatMap((item) =>
+          item.attributes.mapdata.map((data) => {
+            const imageUrl = data.image.data[0].attributes.url;
+            const longitude = Number(data.longitude);
+            const latitude = Number(data.latitude);
+            const description = data.description;
+            const markerId = data.id; // Assuming `data.id` uniquely identifies each marker
+            const alternativeText =
+              data.image.data[0].attributes.alternativeText;
+
+            return (
+              <Marker
+                key={markerId}
+                longitude={longitude}
+                latitude={latitude}
+                onClick={() => togglePopup(markerId)}
               >
-                {marker.description}
-              </Popup>
-            )}
-          </Marker>
-        ))}
+                <Pin />
+                {selectedMarkerId === markerId && (
+                  <Popup
+                    latitude={latitude}
+                    longitude={longitude}
+                    anchor="bottom"
+                    className="text-black"
+                    onClose={() => setSelectedMarkerId(null)}
+                    closeOnClick={false}
+                  >
+                    <h2 className="text-base">{description}</h2>
+                    <img src={imageUrl} alt={alternativeText} />
+                    <Link
+                      href={"/gallery"}
+                      className="text-primary text-sm hover:underline cursor-pointer"
+                    >
+                      Explore Our Gallery
+                    </Link>
+                  </Popup>
+                )}
+              </Marker>
+            );
+          })
+        )}
       </Map>
     </>
   );
