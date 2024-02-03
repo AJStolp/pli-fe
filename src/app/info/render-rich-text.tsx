@@ -14,10 +14,10 @@ export default function RenderRichText({ data }: RenderRichTextProps) {
       content={content}
       blocks={{
         paragraph: ({ children }) => (
-          <p className="max-w-prose py-1 access-anchor">{children}</p>
+          <p className="py-1 access-anchor">{children}</p>
         ),
         heading: ({ children }) => (
-          <h3 className="max-w-prose py-1 access-anchor text-xl">{children}</h3>
+          <h3 className="py-1 access-anchor text-xl">{children}</h3>
         ),
       }}
     />
