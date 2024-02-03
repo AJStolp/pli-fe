@@ -12,7 +12,7 @@ import { getData } from "../../api/fetch";
 import { Suspense } from "react";
 
 export default async function NavigationCentered() {
-  const endpoint = "/api/navigations?populate=*";
+  const endpoint = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/navigations?populate=*`;
 
   try {
     const data: NavData[] = await getData(endpoint);
