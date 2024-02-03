@@ -22,7 +22,7 @@ export default function MapComponent() {
   const [selectedMarkerId, setSelectedMarkerId] = useState<number | null>(null);
 
   const fetchData = async (): Promise<MapContentData[]> => {
-    const apiUrl = `/api/mapcontents?populate[mapdata][populate]=image`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_STRAPI_BE_URL}/api/mapcontents?populate[mapdata][populate]=image`;
     const response = await fetch(apiUrl);
     if (!response.ok) {
       throw new Error("Network response was not ok");
