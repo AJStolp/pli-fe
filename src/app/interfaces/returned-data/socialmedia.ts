@@ -1,6 +1,24 @@
-export interface SocialMedia {
+interface Icon {
   id: number;
   attributes: {
-    iconsandlinks: [id: number, url: string];
+    alternativeText: string;
+    url: string;
   };
+}
+
+interface IconsAndLinks {
+  id: number;
+  url: string;
+  icon: {
+    data: Icon[];
+  };
+}
+
+interface SocialMediaAttributes {
+  iconsandlinks: IconsAndLinks[];
+}
+
+export interface SocialMedia {
+  id: number;
+  attributes: SocialMediaAttributes;
 }

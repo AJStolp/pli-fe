@@ -9,8 +9,8 @@ export default async function Services() {
     const data: ServicesData = await getData(endpoint);
 
     const jsxContent = (
-      <main className="max-w-screen-lg m-auto px-4">
-        <h1 className="text-4xl font-extrabold mt-20 mb-8">
+      <main className="max-w-screen-lg m-auto px-4 mb-28">
+        <h1 className="text-4xl font-extrabold mt-8 lg:mt-20 mb-8">
           {data.attributes.heading}
         </h1>
         <p>{data.attributes.intro}</p>

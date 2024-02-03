@@ -30,7 +30,7 @@ export default async function NavigationCentered() {
           <div className="flex md:order-2">
             <a
               href="mailto:polarlightsimaging@gmail.com"
-              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent focus:ring-cyan-300 rounded-lg focus:ring-2 bg-primary"
+              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent focus:ring-cyan-300 rounded-lg focus:ring-2 bg-primary mr-1"
             >
               <span className="flex items-center transition-all duration-200 rounded-md text-sm px-4 py-1">
                 Contact Us

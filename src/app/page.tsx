@@ -14,7 +14,7 @@ export default async function Page() {
     const icon3 = data.attributes.threeColumnP.col3icon.data.attributes.url;
 
     const jsxContent = (
-      <main className="max-w-screen-lg m-auto px-4 ">
+      <main className="max-w-screen-lg m-auto px-4 mb-24">
         <HeroSection data={data} />
         <div className="bg-gradient-to-r from-accent via-primary to-secondary h-2 my-10 rounded"></div>
 

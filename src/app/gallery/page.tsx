@@ -15,7 +15,7 @@ export default async function Gallery() {
 
     // Assuming data fetching and structure are correct
     return (
-      <main className="max-w-screen-lg m-auto px-4">
+      <main className="max-w-screen-lg m-auto px-4 mb-12">
         <DefaultTabs dronedata={droneData} tourdata={toursData} />
       </main>
     );
