@@ -5,8 +5,7 @@ import { Footer, FooterCopyright, FooterIcon } from "flowbite-react";
 export default async function FooterComponent() {
   const currentYear = new Date().getFullYear();
 
-  const endpoint =
-    "/api/socialmedias?populate[iconsandlinks][populate][icon][populate]";
+  const endpoint = `https://pli-be-production.up.railway.app/api/socialmedias?populate[iconsandlinks][populate][icon][populate]`;
 
   try {
     const data: SocialMedia[] = await getData(endpoint);

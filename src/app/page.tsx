@@ -3,8 +3,7 @@ import HeroSection from "./components/hero/hero";
 import { HomeData } from "./interfaces/returned-data/home";
 
 export default async function Page() {
-  const endpoint =
-    "/api/home?populate[0]=hero&populate[1]=hero.image&populate[2]=threeColumnP.col1icon&populate[3]=threeColumnP.col2icon&populate[4]=threeColumnP.col3icon&populate[5]=threeColumnP.col1cta.linktext&populate[6]=threeColumnP.col1cta.linkpath&populate[7]=threeColumnP.col2cta.linktext&populate[8]=threeColumnP.col2cta.linkpath&populate[9]=threeColumnP.col3cta.linktext&populate[10]=threeColumnP.col3cta.linkpath";
+  const endpoint = `https://pli-be-production.up.railway.app/api/home?populate[0]=hero&populate[1]=hero.image&populate[2]=threeColumnP.col1icon&populate[3]=threeColumnP.col2icon&populate[4]=threeColumnP.col3icon&populate[5]=threeColumnP.col1cta.linktext&populate[6]=threeColumnP.col1cta.linkpath&populate[7]=threeColumnP.col2cta.linktext&populate[8]=threeColumnP.col2cta.linkpath&populate[9]=threeColumnP.col3cta.linktext&populate[10]=threeColumnP.col3cta.linkpath`;
 
   try {
     const data: HomeData = await getData(endpoint);

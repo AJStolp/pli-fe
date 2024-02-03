@@ -12,7 +12,7 @@ import { getData } from "../../api/fetch";
 import { Suspense } from "react";
 
 export default async function NavigationCentered() {
-  const endpoint = "/api/navigations?populate=*";
+  const endpoint = `https://pli-be-production.up.railway.app/api/navigations?populate=*`;
 
   try {
     const data: NavData[] = await getData(endpoint);
