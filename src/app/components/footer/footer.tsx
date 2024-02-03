@@ -1,6 +1,11 @@
 import { SocialMedia } from "../../interfaces/returned-data/socialmedia";
 import { getData } from "../../api/fetch";
-import { Footer, FooterCopyright, FooterIcon } from "flowbite-react";
+import {
+  Footer,
+  FooterCopyright,
+  FooterIcon,
+  FooterTitle,
+} from "flowbite-react";
 
 export default async function FooterComponent() {
   const currentYear = new Date().getFullYear();
@@ -19,8 +24,7 @@ export default async function FooterComponent() {
               by="Polar Lights Imaging"
               year={currentYear}
             />
-            <p>Built by Polar Lights Development</p>
-            <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
+            <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center items-center">
               {data.map((item) =>
                 item.attributes.iconsandlinks.map((media) => (
                   <a
@@ -40,7 +44,9 @@ export default async function FooterComponent() {
                   </a>
                 ))
               )}
-              p
+              <p className="text-sm text-gray-500 dark:text-gray-400 sm:text-center">
+                Built by: Polar Lights Development
+              </p>
             </div>
           </div>
         </div>
