@@ -34,7 +34,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
   };
 
   const handleLoadMoreSections = () => {
-    setDisplayedSectionsCount((prevCount) => prevCount + 3); // Adjust as needed
+    setDisplayedSectionsCount((prevCount) => prevCount + 2); // Adjust as needed
   };
 
   useEffect(() => {
@@ -102,7 +102,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             onClick={() => handleTabClick(0)}
           >
             <img className="w-6 rounded-full mr-0.5" src={""} />
-            Drone
+            Tours
           </button>
         </li>
         <li className="me-2">
@@ -115,12 +115,12 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             onClick={() => handleTabClick(1)}
           >
             <img className="w-6 rounded-full mr-0.5" src={""} />
-            Tours
+            Drone
           </button>
         </li>
       </ul>
       <section className="pt-8 pb-24">
-        {activeTab === 0 &&
+        {activeTab === 1 &&
           dronedata.map((droneItem) => (
             <div key={droneItem.id}>
               {droneItem.attributes.sections
@@ -166,7 +166,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                     </section>
                   );
                 })}
-              {activeTab === 0 &&
+              {activeTab === 1 &&
                 dronedata.some(
                   (droneItem) =>
                     droneItem.attributes.sections.length >
@@ -176,23 +176,13 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                     onClick={handleLoadMoreSections}
                     className="mt-4 p-2 bg-primary text-white rounded hover:bg-accent hover:underline"
                   >
-                    Load More Sections
+                    Show more locations
                   </button>
                 )}
             </div>
           ))}
 
         {activeTab === 0 &&
-          dronedata.length > displayedSectionsCount && ( // Conditionally render the Load More Sections button
-            <button
-              onClick={handleLoadMoreSections}
-              className="mt-4 p-2 bg-blue-500 text-white rounded hover:bg-blue-700"
-            >
-              Load More Sections
-            </button>
-          )}
-
-        {activeTab === 1 &&
           tourdata.map((item) => (
             <section
               key={item.id}
