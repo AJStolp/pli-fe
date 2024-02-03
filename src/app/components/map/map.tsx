@@ -5,7 +5,8 @@ import { useEffect, useRef, useState } from "react";
 import { MapContentData } from "../../interfaces/returned-data/map-content";
 import Link from "next/link";
 
-const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
+const TOKEN =
+  "pk.eyJ1IjoiYXN0b2xwIiwiYSI6ImNscWIwNmpobDB0d2gycWtmamk2aDJqdTYifQ.xeJDAkC5Omjj0NI92stA7A";
 
 const initialViewState = {
   latitude: 40,
