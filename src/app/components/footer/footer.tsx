@@ -4,7 +4,7 @@ export default function Component() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Footer container className="bg-inherit fixed bottom-0">
+    <Footer container className="bg-background fixed bottom-0">
       <div className="w-full">
         <div className="w-full sm:flex sm:items-center sm:justify-between">
           <FooterCopyright
