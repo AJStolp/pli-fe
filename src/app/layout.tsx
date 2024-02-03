@@ -8,7 +8,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Polar Lights Imaging",
-  description: "Skyward bound",
+  description:
+    "Explore top-tier aerial photography, 3D tours, and professional editing services by Polar Lights Imaging in Wisconsin and the Upper Peninsula. Elevate your visuals.",
 };
 
 export default function RootLayout({
