@@ -197,6 +197,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                     src={text.linkpath}
                     allowFullScreen
                     allow="xr-spatial-tracking"
+                    className="rounded"
                   ></iframe>
                 </section>
               ))}

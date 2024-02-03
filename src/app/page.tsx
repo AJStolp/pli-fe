@@ -83,6 +83,10 @@ export default async function Page() {
 
     return jsxContent;
   } catch (error) {
-    return <div>Error:</div>;
+    let errorMessage = "An unknown error occurred";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return <div>Error: {errorMessage}</div>;
   }
 }

@@ -55,6 +55,10 @@ export default async function NavigationCentered() {
       </Suspense>
     );
   } catch (error) {
-    return <div>Error:</div>;
+    let errorMessage = "An unknown error occurred";
+    if (error instanceof Error) {
+      errorMessage = error.message;
+    }
+    return <div>Error: {errorMessage}</div>;
   }
 }
