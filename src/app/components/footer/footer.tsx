@@ -19,6 +19,7 @@ export default async function FooterComponent() {
               by="Polar Lights Imaging"
               year={currentYear}
             />
+            <p>Built by Polar Lights Development</p>
             <div className="mt-4 flex space-x-6 sm:mt-0 sm:justify-center">
               {data.map((item) =>
                 item.attributes.iconsandlinks.map((media) => (
@@ -39,6 +40,7 @@ export default async function FooterComponent() {
                   </a>
                 ))
               )}
+              p
             </div>
           </div>
         </div>
