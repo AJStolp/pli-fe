@@ -78,8 +78,8 @@ export default function MapComponent() {
     );
   };
 
-  const handleGalleryLinkClick = (e) => {
-    const tab = e.currentTarget.getAttribute("data-tab");
+  const handleGalleryLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    const tab = e.currentTarget.getAttribute("data-tab") || "defaultTabValue";
     localStorage.setItem("desiredTab", tab);
     window.location.href = "/gallery"; // Or use Next.js's useRouter().push('/gallery') for SPA navigation / useRouter currently throwing error revisit.
   };
