@@ -17,50 +17,48 @@ export default async function Page() {
         <HeroSection data={data} />
         <div className="bg-gradient-to-r from-accent via-primary to-secondary h-2 my-10 rounded"></div>
 
-        <h2 className="text-4xl font-bold dark:text-white py-6">
+        <h2 className="text-4xl font-bold py-6">
           {data.attributes.ServicesOverview}
         </h2>
 
-        <p className="mb-3 text-texx dark:text-gray-400">
-          {data.attributes.threeColumnP.topP}
-        </p>
+        <p className="mb-3 text-text">{data.attributes.threeColumnP.topP}</p>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-          <section className="mb-3 text-text dark:text-gray-400">
+          <section className="mb-3 text-text">
             <div className="w-24 sm:w-16 mx-auto my-6">
               <img src={icon1} alt={""} className="mr-4 w-full rounded-full" />
             </div>
             <p>{data.attributes.threeColumnP.col1}</p>
             <a
               href={data.attributes.threeColumnP.col1cta.linkpath}
-              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 dark:bg-cyan-600 dark:enabled:hover:bg-cyan-700 dark:focus:ring-cyan-800 rounded-lg focus:ring-2 bg-primary my-4"
+              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 rounded-lg focus:ring-2 bg-primary my-4"
             >
               <span className="flex items-center transition-all duration-200 rounded-md text-sm px-4 py-2">
                 {data.attributes.threeColumnP.col1cta.linktext}
               </span>
             </a>
           </section>
-          <section className="mb-3 text-text dark:text-gray-400">
+          <section className="mb-3 text-text">
             <div className="w-24 sm:w-16 mx-auto my-6">
               <img src={icon2} alt={""} className="mr-4 w-full rounded-full" />
             </div>
             <p>{data.attributes.threeColumnP.col2}</p>
             <a
               href={data.attributes.threeColumnP.col2cta.linkpath}
-              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 dark:bg-cyan-600 dark:enabled:hover:bg-cyan-700 dark:focus:ring-cyan-800 rounded-lg focus:ring-2 bg-primary my-4"
+              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 rounded-lg focus:ring-2 bg-primary my-4"
             >
               <span className="flex items-center transition-all duration-200 rounded-md text-sm px-4 py-2">
                 {data.attributes.threeColumnP.col2cta.linktext}
               </span>
             </a>
           </section>
-          <section className="mb-3 text-text dark:text-gray-400">
+          <section className="mb-3 text-text">
             <div className="w-24 sm:w-16 mx-auto my-6">
               <img src={icon3} alt={""} className="mr-4 w-full rounded-full" />
             </div>
             <p>{data.attributes.threeColumnP.col3}</p>
             <a
               href={data.attributes.threeColumnP.col3cta.linkpath}
-              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 dark:bg-cyan-600 dark:enabled:hover:bg-cyan-700 dark:focus:ring-cyan-800 rounded-lg focus:ring-2 bg-primary my-4"
+              className="group flex items-center justify-center p-0.5 text-center font-medium relative focus:z-10 focus:outline-none text-white border border-transparent enabled:hover:bg-cyan-800 focus:ring-cyan-300 rounded-lg focus:ring-2 bg-primary my-4"
             >
               <span className="flex items-center transition-all duration-200 rounded-md text-sm px-4 py-2">
                 {data.attributes.threeColumnP.col3cta.linktext}
@@ -68,7 +66,7 @@ export default async function Page() {
             </a>
           </section>
         </div>
-        <p className="mb-3 text-text dark:text-gray-400 pb-12 ">
+        <p className="mb-3 text-text pb-12">
           {data.attributes.threeColumnP.bottomP}
           <span className="ml-1 underline decoration-accent cursor-pointer">
             <a href="mailto:polarlightsimaging@gmail.com">
