@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/router";
 import { DroneData } from "../../interfaces/returned-data/drone";
 import { TourData } from "../../interfaces/returned-data/tours";
 import { Suspense, useEffect, useState } from "react";
@@ -79,6 +80,14 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
     }
   }, [fullscreenImageUrl]); // Effect runs when fullscreenImageUrl changes
 
+  useEffect(() => {
+    const desiredTab = localStorage.getItem("desiredTab");
+    if (desiredTab === "drone") {
+      setActiveTab(1); // Assuming 1 is the index for the Drone tab
+    }
+    localStorage.removeItem("desiredTab"); // Clean up
+  }, []);
+
   const handleImageClick = (imageUrl: string) => {
     if (fullscreenImageUrl) {
       // Attempting to exit fullscreen if already in fullscreen state
@@ -101,7 +110,6 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             }`}
             onClick={() => handleTabClick(0)}
           >
-            <img className="w-6 rounded-full mr-0.5" src={""} />
             Tours
           </button>
         </li>
@@ -114,7 +122,6 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             }`}
             onClick={() => handleTabClick(1)}
           >
-            <img className="w-6 rounded-full mr-0.5" src={""} />
             Drone
           </button>
         </li>
@@ -198,6 +205,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                     allowFullScreen
                     allow="xr-spatial-tracking"
                     className="rounded"
+                    title={text.linktext}
                   ></iframe>
                 </section>
               ))}
