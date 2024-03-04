@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import { MapContentData } from "../../interfaces/returned-data/map-content";
 import Link from "next/link";
 import MapSkeleton from "../skeleton/map-skeleton";
+import { useRouter } from "next/router";
 
 const TOKEN = process.env.NEXT_PUBLIC_REACT_MAPBOX_TOKEN;
 
@@ -78,12 +79,6 @@ export default function MapComponent() {
     );
   };
 
-  const handleGalleryLinkClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    const tab = e.currentTarget.getAttribute("data-tab") || "defaultTabValue";
-    localStorage.setItem("desiredTab", tab);
-    window.location.href = "/gallery"; // Or use Next.js's useRouter().push('/gallery') for SPA navigation / useRouter currently throwing error revisit.
-  };
-
   return (
     <>
       {showMessage && (
@@ -145,10 +140,10 @@ export default function MapComponent() {
                     <h2 className="text-base">{description}</h2>
                     <img src={imageUrl} alt={alternativeText} />
                     <Link
-                      href={"/gallery?tab=drone"}
+                      href={"/gallery#drone"}
                       className="text-primary text-sm hover:underline cursor-pointer"
                       data-tab="drone"
-                      onClick={handleGalleryLinkClick}
+                      // onClick={handleGalleryLinkClick}
                     >
                       Explore Our Gallery
                     </Link>

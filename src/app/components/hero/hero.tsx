@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import HeroSkeleton from "../skeleton/hero-skeleton";
+import HeroSkeleton from "../skeleton/image-skeleton";
 import { HomeData } from "../../interfaces/returned-data/home";
 
 interface HeroSectionProps {
