@@ -1,9 +1,9 @@
 "use client";
 
-import { useRouter } from "next/router";
 import { DroneData } from "../../interfaces/returned-data/drone";
 import { TourData } from "../../interfaces/returned-data/tours";
 import { Suspense, useEffect, useState } from "react";
+import ImageSkeleton from "../skeleton/image-skeleton";
 
 interface DefaultTabsProps {
   dronedata: DroneData[];
@@ -22,6 +22,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
   const [fullscreenImageUrl, setFullscreenImageUrl] = useState<string | null>(
     null
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleTabClick = (index: number) => {
     setActiveTab(index);
@@ -78,15 +79,15 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
         }
       };
     }
-  }, [fullscreenImageUrl]); // Effect runs when fullscreenImageUrl changes
+  }, [fullscreenImageUrl]);
 
   useEffect(() => {
-    const desiredTab = localStorage.getItem("desiredTab");
-    if (desiredTab === "drone") {
-      setActiveTab(1); // Assuming 1 is the index for the Drone tab
-    }
-    localStorage.removeItem("desiredTab"); // Clean up
-  }, []);
+    setIsLoading(false); // Set loading to false once data is fetched
+  }, [activeTab]);
+
+  if (isLoading) {
+    return <ImageSkeleton />; // Show skeleton while loading
+  }
 
   const handleImageClick = (imageUrl: string) => {
     if (fullscreenImageUrl) {
@@ -110,7 +111,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             }`}
             onClick={() => handleTabClick(0)}
           >
-            Tours
+            Drone
           </button>
         </li>
         <li className="me-2">
@@ -122,12 +123,12 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             }`}
             onClick={() => handleTabClick(1)}
           >
-            Drone
+            Tours
           </button>
         </li>
       </ul>
       <section className="pt-8 pb-24">
-        {activeTab === 1 &&
+        {activeTab === 0 &&
           dronedata.map((droneItem) => (
             <div key={droneItem.id}>
               {droneItem.attributes.sections
@@ -155,9 +156,6 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                             />
                           ))}
 
-                          {/* {imagesToDisplay.map((url, idx) => (
-                            <img key={idx} src={url.attributes.url} alt="" />
-                          ))} */}
                           {imagesToDisplay.length <
                             section.media.flatMap((i) => i.media.data)
                               .length && (
@@ -173,7 +171,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
                     </section>
                   );
                 })}
-              {activeTab === 1 &&
+              {activeTab === 0 &&
                 dronedata.some(
                   (droneItem) =>
                     droneItem.attributes.sections.length >
@@ -189,7 +187,7 @@ export default function DefaultTabs({ dronedata, tourdata }: DefaultTabsProps) {
             </div>
           ))}
 
-        {activeTab === 0 &&
+        {activeTab === 1 &&
           tourdata.map((item) => (
             <section
               key={item.id}
