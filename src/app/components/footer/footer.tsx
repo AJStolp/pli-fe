@@ -45,7 +45,7 @@ export default async function FooterComponent() {
                 ))
               )}
               <p className="text-sm text-gray-500 sm:text-center">
-                Built by: Polar Lights Development
+                Built by: Backcountry Creative
               </p>
             </div>
           </div>
