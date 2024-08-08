@@ -16,7 +16,7 @@ export default async function Info() {
         <RenderRichText data={data} />
         <a
           href={`mailto: ${data.attributes.email}`}
-          className="text-primary hover:underline hover:text-accent py-6"
+          className="text-[#0bedee] hover:underline hover:text-accent py-6"
         >
           {data.attributes.email}
         </a>
